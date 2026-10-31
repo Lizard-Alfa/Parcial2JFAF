@@ -21,6 +21,7 @@ namespace CadParcial2JFAF
         public Nullable<System.TimeSpan> horaFin { get; set; }
         public string diaSemana { get; set; }
         public string conductorPrincipal { get; set; }
+        public string clasificacion { get; set; }
         public short estado { get; set; }
     
         public virtual Canal Canal { get; set; }

@@ -33,6 +33,7 @@ namespace CpParcial2JFAF
             dgvLista.Columns["horaFin"].HeaderText = "Hora de Fin";
             dgvLista.Columns["diaSemana"].HeaderText = "Dia del Programa";
             dgvLista.Columns["conductorPrincipal"].HeaderText = "Conductor Principal";
+            dgvLista.Columns["clasificacion"].HeaderText = "Clasificación";
 
             if (programas.Count > 0) dgvLista.CurrentCell = dgvLista.Rows[0].Cells["nombreCanal"];
             btnEditar.Enabled = programas.Count > 0;
@@ -70,6 +71,7 @@ namespace CpParcial2JFAF
             mtbHoraFin.Clear();
             txtDiaSemana.Clear();
             txtConductorPrincipal.Clear();
+            cbxClasificacion.SelectedIndex = -1;
             resetearErrores();
         }
         private void resetearErrores()
@@ -80,11 +82,12 @@ namespace CpParcial2JFAF
             erpHoraFin.Clear();
             erpDiaSemana.Clear();
             erpConductorPrincipal.Clear();
+            erpClasificacion.Clear();
         }
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             esNuevo = true;
-            Size = new Size(800, 520);
+            Size = new Size(800, 540);
             pnlAcciones.Enabled = false;
             resetearCampos();
         }
@@ -92,7 +95,7 @@ namespace CpParcial2JFAF
         private void btnEditar_Click(object sender, EventArgs e)
         {
             esNuevo = false;
-            Size = new Size(800, 520);
+            Size = new Size(800, 540);
             pnlAcciones.Enabled = false;
             resetearErrores();
 
@@ -106,6 +109,7 @@ namespace CpParcial2JFAF
                 mtbHoraFin.Text = horarioPrograma.horaFin?.ToString(@"hh\:mm") ?? "";
                 txtDiaSemana.Text = horarioPrograma.diaSemana;
                 txtConductorPrincipal.Text = horarioPrograma.conductorPrincipal;
+                cbxClasificacion.SelectedText = horarioPrograma.clasificacion;
             }
             catch (Exception ex)
             {
@@ -155,6 +159,11 @@ namespace CpParcial2JFAF
                 erpConductorPrincipal.SetError(txtConductorPrincipal, "El Conductor Principal es Obligatorio");
                 esValido = false;
             }
+            if (cbxClasificacion.SelectedIndex == -1)
+            {
+                erpClasificacion.SetError(cbxClasificacion, "La Clasificación es Obligatoria");
+                esValido = false;
+            }
 
             return esValido;
         }
@@ -178,6 +187,7 @@ namespace CpParcial2JFAF
                     horaFin = horaFin,
                     diaSemana = txtDiaSemana.Text.Trim(),
                     conductorPrincipal = txtConductorPrincipal.Text.Trim(),
+                    clasificacion = cbxClasificacion.SelectedText,
                 };
 
                 try

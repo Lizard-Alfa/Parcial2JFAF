@@ -18,6 +18,7 @@ namespace ClnParcial2JFAF
                     x.titulo == horarioPrograma.titulo &&
                     x.diaSemana == horarioPrograma.diaSemana &&
                     x.horaInicio == horarioPrograma.horaInicio &&
+                    x.clasificacion == horarioPrograma.clasificacion &&
                     x.estado == 1).FirstOrDefault();
                 if (existe != null) throw new Exception($"Ya existe un Programa con el título '{horarioPrograma.titulo}' en ese canal, día y hora.");
                 context.HorarioPrograma.Add(horarioPrograma);
@@ -38,6 +39,7 @@ namespace ClnParcial2JFAF
                 existe.horaFin = horarioPrograma.horaFin;
                 existe.diaSemana = horarioPrograma.diaSemana;
                 existe.conductorPrincipal = horarioPrograma.conductorPrincipal;
+                existe.clasificacion = horarioPrograma.clasificacion;
 
                 return context.SaveChanges();
             }

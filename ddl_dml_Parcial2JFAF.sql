@@ -38,18 +38,22 @@ CREATE TABLE HorarioPrograma (
     horaFin TIME NULL,
     diaSemana VARCHAR(20) NOT NULL,
     conductorPrincipal VARCHAR(100) NOT NULL,
+    clasificacion VARCHAR(10) NOT NULL,
     estado SMALLINT NOT NULL DEFAULT 1,
     CONSTRAINT FK__HorarioProgama_Canal FOREIGN KEY (idCanal) REFERENCES Canal(id)
 );
 GO
 
+DROP PROC IF EXISTS paHorarioProgramaListar;
+GO
+
 CREATE PROC paHorarioProgramaListar @parametro VARCHAR(80)
 AS
     SELECT hp.id, hp.idCanal, c.nombre AS nombreCanal, hp.titulo, hp.horaInicio, 
-           hp.horaFin, hp.diaSemana, hp.conductorPrincipal, hp.estado
+           hp.horaFin, hp.diaSemana, hp.conductorPrincipal, hp.clasificacion, hp.estado
     FROM HorarioPrograma hp
     INNER JOIN Canal c ON hp.idCanal = c.id
-    WHERE hp.estado = 1 AND hp.titulo+hp.conductorPrincipal LIKE '%' + REPLACE (@parametro, ' ', '%') + '%'
+    WHERE hp.estado = 1 AND hp.titulo+hp.conductorPrincipal+hp.clasificacion LIKE '%' + REPLACE (@parametro, ' ', '%') + '%'
     ORDER BY hp.diaSemana, hp.horaInicio;
 GO
 EXEC paHorarioProgramaListar '';
@@ -67,11 +71,11 @@ INSERT INTO Canal (nombre, frecuencia) VALUES
 GO
 
 -- Horario Programas
-INSERT INTO HorarioPrograma (idCanal, titulo, horaInicio, horaFin, diaSemana, conductorPrincipal) VALUES
-(1, 'Telenoche', '20:00', '21:00', 'Viernes', 'Jhon Arandia'),
-(1, 'Cámara en Mano', '16:30', '18:00', 'Lunes', 'Ilsen Fernandez'),
-(2, 'Primero Noticias', '07:00', '09:00', 'Lunes', 'Narda Castro'),
-(3, 'Concierto Privado', '19:00', '21:00', 'Sabado', 'Pepe Macias');
+INSERT INTO HorarioPrograma (idCanal, titulo, horaInicio, horaFin, diaSemana, conductorPrincipal, clasificacion) VALUES
+(1, 'Telenoche', '20:00', '21:00', 'Viernes', 'Jhon Arandia', 'ATP'),
+(1, 'Cámara en Mano', '16:30', '18:00', 'Lunes', 'Ilsen Fernandez', '10+'),
+(2, 'Primero Noticias', '07:00', '09:00', 'Lunes', 'Narda Castro', '13+'),
+(3, 'Concierto Privado', '19:00', '21:00', 'Sabado', 'Pepe Macias', '18+');
 GO
 
 SELECT * FROM Canal;

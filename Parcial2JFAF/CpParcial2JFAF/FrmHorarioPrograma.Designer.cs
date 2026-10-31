@@ -40,6 +40,8 @@
             this.btnCerrar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.gbxDatos = new System.Windows.Forms.GroupBox();
+            this.mtbHoraFin = new System.Windows.Forms.MaskedTextBox();
+            this.mtbHoraInicio = new System.Windows.Forms.MaskedTextBox();
             this.txtConductorPrincipal = new System.Windows.Forms.TextBox();
             this.txtDiaSemana = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -59,8 +61,9 @@
             this.erpHoraFin = new System.Windows.Forms.ErrorProvider(this.components);
             this.erpDiaSemana = new System.Windows.Forms.ErrorProvider(this.components);
             this.erpConductorPrincipal = new System.Windows.Forms.ErrorProvider(this.components);
-            this.mtbHoraInicio = new System.Windows.Forms.MaskedTextBox();
-            this.mtbHoraFin = new System.Windows.Forms.MaskedTextBox();
+            this.lblClasificacion = new System.Windows.Forms.Label();
+            this.cbxClasificacion = new System.Windows.Forms.ComboBox();
+            this.erpClasificacion = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.gbxLista.SuspendLayout();
             this.pnlAcciones.SuspendLayout();
@@ -71,6 +74,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.erpHoraFin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.erpDiaSemana)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.erpConductorPrincipal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpClasificacion)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvLista
@@ -201,15 +205,37 @@
             this.gbxDatos.Controls.Add(this.lblDiaSemana);
             this.gbxDatos.Controls.Add(this.lblHoraFin);
             this.gbxDatos.Controls.Add(this.lblHoraInicio);
+            this.gbxDatos.Controls.Add(this.cbxClasificacion);
             this.gbxDatos.Controls.Add(this.cbxCanal);
             this.gbxDatos.Controls.Add(this.lblTitulo);
+            this.gbxDatos.Controls.Add(this.lblClasificacion);
             this.gbxDatos.Controls.Add(this.lblCanal);
             this.gbxDatos.Location = new System.Drawing.Point(24, 326);
             this.gbxDatos.Name = "gbxDatos";
-            this.gbxDatos.Size = new System.Drawing.Size(741, 150);
+            this.gbxDatos.Size = new System.Drawing.Size(741, 177);
             this.gbxDatos.TabIndex = 7;
             this.gbxDatos.TabStop = false;
             this.gbxDatos.Text = "Datos";
+            // 
+            // mtbHoraFin
+            // 
+            this.mtbHoraFin.BeepOnError = true;
+            this.mtbHoraFin.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert;
+            this.mtbHoraFin.Location = new System.Drawing.Point(125, 117);
+            this.mtbHoraFin.Mask = "00:00";
+            this.mtbHoraFin.Name = "mtbHoraFin";
+            this.mtbHoraFin.Size = new System.Drawing.Size(220, 24);
+            this.mtbHoraFin.TabIndex = 5;
+            // 
+            // mtbHoraInicio
+            // 
+            this.mtbHoraInicio.BeepOnError = true;
+            this.mtbHoraInicio.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert;
+            this.mtbHoraInicio.Location = new System.Drawing.Point(125, 87);
+            this.mtbHoraInicio.Mask = "00:00";
+            this.mtbHoraInicio.Name = "mtbHoraInicio";
+            this.mtbHoraInicio.Size = new System.Drawing.Size(220, 24);
+            this.mtbHoraInicio.TabIndex = 5;
             // 
             // txtConductorPrincipal
             // 
@@ -230,7 +256,7 @@
             // 
             this.btnGuardar.Image = global::CpParcial2JFAF.Properties.Resources.save;
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(499, 102);
+            this.btnGuardar.Location = new System.Drawing.Point(499, 123);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(100, 40);
             this.btnGuardar.TabIndex = 4;
@@ -243,7 +269,7 @@
             // 
             this.btnCancelar.Image = global::CpParcial2JFAF.Properties.Resources.cancel;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(612, 102);
+            this.btnCancelar.Location = new System.Drawing.Point(612, 123);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(107, 40);
             this.btnCancelar.TabIndex = 4;
@@ -300,7 +326,7 @@
             // 
             this.cbxCanal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxCanal.FormattingEnabled = true;
-            this.cbxCanal.Location = new System.Drawing.Point(125, 25);
+            this.cbxCanal.Location = new System.Drawing.Point(125, 23);
             this.cbxCanal.Name = "cbxCanal";
             this.cbxCanal.Size = new System.Drawing.Size(220, 26);
             this.cbxCanal.TabIndex = 1;
@@ -360,32 +386,34 @@
             // 
             this.erpConductorPrincipal.ContainerControl = this;
             // 
-            // mtbHoraInicio
+            // lblClasificacion
             // 
-            this.mtbHoraInicio.BeepOnError = true;
-            this.mtbHoraInicio.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert;
-            this.mtbHoraInicio.Location = new System.Drawing.Point(125, 87);
-            this.mtbHoraInicio.Mask = "00:00";
-            this.mtbHoraInicio.Name = "mtbHoraInicio";
-            this.mtbHoraInicio.Size = new System.Drawing.Size(220, 24);
-            this.mtbHoraInicio.TabIndex = 5;
+            this.lblClasificacion.AutoSize = true;
+            this.lblClasificacion.Location = new System.Drawing.Point(351, 89);
+            this.lblClasificacion.Name = "lblClasificacion";
+            this.lblClasificacion.Size = new System.Drawing.Size(96, 18);
+            this.lblClasificacion.TabIndex = 0;
+            this.lblClasificacion.Text = "Clasificación:";
             // 
-            // mtbHoraFin
+            // cbxClasificacion
             // 
-            this.mtbHoraFin.BeepOnError = true;
-            this.mtbHoraFin.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Insert;
-            this.mtbHoraFin.Location = new System.Drawing.Point(125, 117);
-            this.mtbHoraFin.Mask = "00:00";
-            this.mtbHoraFin.Name = "mtbHoraFin";
-            this.mtbHoraFin.Size = new System.Drawing.Size(220, 24);
-            this.mtbHoraFin.TabIndex = 5;
+            this.cbxClasificacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxClasificacion.FormattingEnabled = true;
+            this.cbxClasificacion.Location = new System.Drawing.Point(499, 91);
+            this.cbxClasificacion.Name = "cbxClasificacion";
+            this.cbxClasificacion.Size = new System.Drawing.Size(220, 26);
+            this.cbxClasificacion.TabIndex = 1;
+            // 
+            // erpClasificacion
+            // 
+            this.erpClasificacion.ContainerControl = this;
             // 
             // FrmHorarioPrograma
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(784, 481);
+            this.ClientSize = new System.Drawing.Size(784, 501);
             this.Controls.Add(this.gbxDatos);
             this.Controls.Add(this.pnlAcciones);
             this.Controls.Add(this.gbxLista);
@@ -410,6 +438,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.erpHoraFin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.erpDiaSemana)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.erpConductorPrincipal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpClasificacion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -449,6 +478,9 @@
         private System.Windows.Forms.ErrorProvider erpConductorPrincipal;
         private System.Windows.Forms.MaskedTextBox mtbHoraFin;
         private System.Windows.Forms.MaskedTextBox mtbHoraInicio;
+        private System.Windows.Forms.ComboBox cbxClasificacion;
+        private System.Windows.Forms.Label lblClasificacion;
+        private System.Windows.Forms.ErrorProvider erpClasificacion;
     }
 }
 
